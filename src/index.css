@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #101c2c;
+  --color-charcoal: #202a35;
+  --color-warm: #fafaf7;
+  --color-orange: #f47732;
+  --color-orange-deep: #dc5f1d;
+  --color-slate: #687586;
+  --color-soft: #e8ebef;
+  --color-gold: #b99755;
+  --color-forest: #1e6b48;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-warm);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: #f47732; color: #fff; }
+  :focus-visible {
+    outline: 3px solid var(--color-orange);
+    outline-offset: 3px;
+  }
+  button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .text-shadow-hero { text-shadow: 0 2px 20px rgba(0, 0, 0, 0.28); }
+  .bg-grid {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .animate-fade-up { animation: fadeUp 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .animate-fade-in { animation: fadeIn 0.4s ease-out both; }
+  .animate-scale-in { animation: scaleIn 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .animate-slide-in { animation: slideIn 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
